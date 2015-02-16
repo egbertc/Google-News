@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "BookmarksTableViewController.h"
 
 @interface DetailViewController ()
 
@@ -48,12 +49,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showBookmarks"]) {
-        
+        NSLog(@"SEGUE TO BOOKMARKS");
         NSDictionary *article = (NSDictionary*) _detailItem;
         //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        BookmarksTableViewController *controller = (BookmarksTableViewController *)[segue destinationViewController];// topViewController];
         controller.detailItem = article;
-        NSLog(@"SEGUE TO BOOKMARKS");
+        
     }
 }
 
