@@ -15,9 +15,11 @@
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
+- (IBAction)reloadTable:(UIRefreshControl *)sender;
+
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
+@property (strong,nonatomic) NSMutableArray *newsList;
 
 @end
 

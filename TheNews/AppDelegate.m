@@ -27,6 +27,9 @@
     UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
     MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
+    
+    [self setBookmarkDefaults];
+    
     return YES;
 }
 
@@ -52,6 +55,18 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+#pragma mark - setDefaults
+
+-(void)setBookmarkDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSMutableArray *bookmarks = [[NSMutableArray alloc] init];
+    NSDictionary *bookmarkDefault = [NSDictionary dictionaryWithObject:bookmarks forKey:@"bookmarks"];
+        
+    [defaults registerDefaults:bookmarkDefault];
 }
 
 #pragma mark - Split view

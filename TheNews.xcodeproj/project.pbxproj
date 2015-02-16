@@ -17,6 +17,8 @@
 		DC3C2E8C1A926CAC00A86BFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3C2E8A1A926CAC00A86BFB /* LaunchScreen.xib */; };
 		DC3C2E981A926CAC00A86BFB /* TheNewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2E971A926CAC00A86BFB /* TheNewsTests.m */; };
 		DC3C2EA31A9270F100A86BFB /* SharedNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2EA21A9270F100A86BFB /* SharedNetworking.m */; };
+		DC3C2EA61A927EDF00A86BFB /* NewsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2EA51A927EDF00A86BFB /* NewsListTableViewCell.m */; };
+		DC3C2EDE1A92A6BB00A86BFB /* BookmarksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2EDD1A92A6BB00A86BFB /* BookmarksTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,10 @@
 		DC3C2E971A926CAC00A86BFB /* TheNewsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheNewsTests.m; sourceTree = "<group>"; };
 		DC3C2EA11A9270F100A86BFB /* SharedNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedNetworking.h; sourceTree = "<group>"; };
 		DC3C2EA21A9270F100A86BFB /* SharedNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedNetworking.m; sourceTree = "<group>"; };
+		DC3C2EA41A927EDF00A86BFB /* NewsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTableViewCell.h; sourceTree = "<group>"; };
+		DC3C2EA51A927EDF00A86BFB /* NewsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTableViewCell.m; sourceTree = "<group>"; };
+		DC3C2EDC1A92A6BB00A86BFB /* BookmarksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksTableViewController.h; sourceTree = "<group>"; };
+		DC3C2EDD1A92A6BB00A86BFB /* BookmarksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,10 @@
 				DC3C2E751A926CAC00A86BFB /* Supporting Files */,
 				DC3C2EA11A9270F100A86BFB /* SharedNetworking.h */,
 				DC3C2EA21A9270F100A86BFB /* SharedNetworking.m */,
+				DC3C2EA41A927EDF00A86BFB /* NewsListTableViewCell.h */,
+				DC3C2EA51A927EDF00A86BFB /* NewsListTableViewCell.m */,
+				DC3C2EDC1A92A6BB00A86BFB /* BookmarksTableViewController.h */,
+				DC3C2EDD1A92A6BB00A86BFB /* BookmarksTableViewController.m */,
 			);
 			path = TheNews;
 			sourceTree = "<group>";
@@ -234,9 +244,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3C2EA31A9270F100A86BFB /* SharedNetworking.m in Sources */,
+				DC3C2EDE1A92A6BB00A86BFB /* BookmarksTableViewController.m in Sources */,
 				DC3C2E841A926CAC00A86BFB /* DetailViewController.m in Sources */,
 				DC3C2E811A926CAC00A86BFB /* MasterViewController.m in Sources */,
 				DC3C2E7E1A926CAC00A86BFB /* TheNews.xcdatamodeld in Sources */,
+				DC3C2EA61A927EDF00A86BFB /* NewsListTableViewCell.m in Sources */,
 				DC3C2E7B1A926CAC00A86BFB /* AppDelegate.m in Sources */,
 				DC3C2E781A926CAC00A86BFB /* main.m in Sources */,
 			);

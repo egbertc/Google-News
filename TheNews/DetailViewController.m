@@ -26,9 +26,12 @@
 }
 
 - (void)configureView {
+    
     // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
+    if (self.detailItem)
+    {
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString:[_detailItem objectForKey:@"link" ]] cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+        [self.articleWebView loadRequest:request];
     }
 }
 
@@ -41,6 +44,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"showBookmarks"]) {
+        
+        NSDictionary *article = (NSDictionary*) _detailItem;
+        //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        controller.detailItem = article;
+        NSLog(@"SEGUE TO BOOKMARKS");
+    }
 }
 
 @end

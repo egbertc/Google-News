@@ -11,6 +11,6 @@
 @interface SharedNetworking : NSObject
 
 + (id)sharedSharedNetworking;
-- (void)getDataForURL:(NSString*)url success:(void (^)(NSArray *array, NSError *error))successCompletion failure:(void (^)(void))failureCompletion;
+- (void)getDataForURL:(NSString*)url success:(void (^)(NSDictionary *data, NSError *error))successCompletion failure:(void (^)(void))failureCompletion;
 
 @end

@@ -37,7 +37,7 @@
 #pragma mark - Requests
 // -----------------------------------------------------------------------------
 
-- (void)getDataForURL:(NSString*)url success:(void (^)(NSArray *array, NSError *error))successCompletion failure:(void (^)(void))failureCompletion
+- (void)getDataForURL:(NSString*)url success:(void (^)(NSDictionary* array, NSError *error))successCompletion failure:(void (^)(void))failureCompletion
 {
     [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
     {
@@ -45,8 +45,8 @@
         if(httpResp.statusCode == 200)
         {
             NSError *jsonError;
-            NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
-            NSLog(@"Downloaded:\n -- %@ ",array);
+            NSDictionary *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+            NSLog(@"Downloaded:\n -- ");
             successCompletion(array,nil);
         }
         else

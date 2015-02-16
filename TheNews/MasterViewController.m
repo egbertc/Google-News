@@ -8,8 +8,15 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "SharedNetworking.h"
+#import "NewsListTableViewCell.h"
 
 @interface MasterViewController ()
+
+@property (strong, nonatomic) NSDateFormatter* articleDateFormat;
+@property (strong, nonatomic) NSDateFormatter* cellDateFormat;
+@property (strong,nonatomic) SharedNetworking *networking;
+@property (strong,nonatomic) NSString* newsURL;
 
 @end
 
@@ -24,11 +31,71 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    _articleDateFormat = [[NSDateFormatter alloc] init];
+    [_articleDateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZZ"]; //"Mon, 16 Feb 2015 10:33:43 -0800"
+    _cellDateFormat = [[NSDateFormatter alloc] init];
+    [_cellDateFormat setDateFormat:@"dd MMM yyyy"];
+    
+    _newsURL = @"http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=8&q=http%3A%2F%2Fnews.google.com%2Fnews%3Foutput%3Drss";
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    //self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    _networking = [SharedNetworking sharedSharedNetworking];
+    
+    [_networking getDataForURL:_newsURL success:^(NSDictionary *data, NSError *error) {
+        self.newsList = [[[data objectForKey:@"responseData"] objectForKey:@"feed"] objectForKey:@"entries"];
+        //NSLog(@"\nRECIEVED DATA--------------------------\n %@", data);
+        NSLog(@"\n DATA LOADED \n");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self loadFirstArticle];
+        });
+        
+    } failure:^{
+        //handle network failure
+        NSLog(@"NETWORK FAILURE");
+    }];
+    
+    
+    //[self.tableView reloadData];
+}
+
+- (void)loadFirstArticle
+{
+    
+        //NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDictionary *article = (NSDictionary*) [self.newsList objectAtIndex:0];
+        //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        DetailViewController *controller = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+        [controller setDetailItem:article];
+        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        controller.navigationItem.leftItemsSupplementBackButton = YES;
+    //controller.
+}
+
+- (void) loadData
+{
+    
+    [_networking getDataForURL:_newsURL success:^(NSDictionary *data, NSError *error) {
+        self.newsList = [[[data objectForKey:@"responseData"] objectForKey:@"feed"] objectForKey:@"entries"];
+        //NSLog(@"\nRECIEVED DATA--------------------------\n %@", data);
+        NSLog(@"\n DATA LOADED \n");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
+    } failure:^{
+        //handle network failure
+        NSLog(@"NETWORK FAILURE");
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,9 +127,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        NSDictionary *article = (NSDictionary*) [self.newsList objectAtIndex:indexPath.row];
+        //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
+        [controller setDetailItem:article];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
@@ -70,24 +138,34 @@
 
 #pragma mark - Table View
 
+- (IBAction)reloadTable:(UIRefreshControl *)sender
+{
+    [self loadData];
+    NSLog(@"RELOADING...");
+    [self.refreshControl endRefreshing];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+    return 1;//[[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+   // id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [_newsList count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (NewsListTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //NSLog(@"TABLEVIEW UPDATE: %@", indexPath);
+    NewsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewsListCell" forIndexPath:indexPath];
+    //NSLog(@"Cell Retrieved: %@", cell);
     [self configureCell:cell atIndexPath:indexPath];
+    //NSLog(@"Cell Configured");
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -105,9 +183,20 @@
     }
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+- (void)configureCell:(NewsListTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    //NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    //cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+   
+    
+    NSDictionary *article = (NSDictionary*) [self.newsList objectAtIndex:indexPath.row];
+    
+    cell.articleTitle.text = [article objectForKey:@"title"];
+    //NSLog(@"Title Set: %@", cell.articleTitle.text);
+    cell.articleSnippet.text = [article objectForKey:@"contentSnippet"];
+    //NSLog(@"Snipped Set: %@",cell.articleSnippet.text);
+    NSDate *pubDate = [_articleDateFormat dateFromString:[article objectForKey:@"publishedDate"]];
+    cell.publishedDate.text = [_cellDateFormat stringFromDate:pubDate];
+    //NSLog(@"Date Set: %@",cell.publishedDate.text);
 }
 
 #pragma mark - Fetched results controller
@@ -187,7 +276,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(NewsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
