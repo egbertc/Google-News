@@ -20,7 +20,7 @@
     [super viewDidLoad];
     _defaults = [NSUserDefaults standardUserDefaults];
     
-    _bookmarks = [_defaults objectForKey:@"bookmarks"];
+    _bookmarks = [[NSMutableArray alloc] initWithArray:[_defaults objectForKey:@"bookmarks"]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -62,15 +62,28 @@
 - (IBAction)addBookmark:(id)sender;
 {
     NSLog(@"ADDING ITEM: %@", [_detailItem objectForKey:@"title"]);
-    //[_bookmarks addObject:_detailItem];
+    [_bookmarks addObject:_detailItem];
+    [_defaults removeObjectForKey:@"bookmarks"];
+    [_defaults setObject:_bookmarks forKey:@"bookmarks"];
+    
     [self.tableView reloadData];
 }
 
 - (IBAction)editBookmarks:(id)sender;
 {
-    
+    [self.tableView setEditing:YES animated:YES];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"DELETE");
+    [_bookmarks removeObjectAtIndex:indexPath.row];
+    [_defaults removeObjectForKey:@"bookmarks"];
+    [_defaults setObject:_bookmarks forKey:@"bookmarks"];
+    
+    [self.tableView reloadData];
+
+}
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
