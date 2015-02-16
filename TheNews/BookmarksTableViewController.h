@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
 @interface BookmarksTableViewController : UITableViewController
 - (IBAction)addBookmark:(id)sender;
 - (IBAction)editBookmarks:(id)sender;
 
+@property (weak,nonatomic) id<BookmarkToWebViewDelegate> delegate;
 @property (strong,nonatomic) NSDictionary* detailItem;
 
 //- (void) setDetailItem:(NSDictionary*)item;

@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
+@protocol BookmarkToWebViewDelegate <NSObject>
+@required
+- (void)bookmark:(id)sender sendsURL:(NSURL*)url;
+@end
+
+@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebView;
+
+
 
 @end
 

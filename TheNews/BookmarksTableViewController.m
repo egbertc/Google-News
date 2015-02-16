@@ -90,6 +90,12 @@
     return YES;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSURL *url = [NSURL URLWithString:[[_bookmarks objectAtIndex:indexPath.row ] objectForKey:@"link" ]];
+    [_delegate bookmark:[_bookmarks objectAtIndex:indexPath.row ] sendsURL:url];
+}
+
 
 /*
 // Override to support editing the table view.

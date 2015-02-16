@@ -54,8 +54,16 @@
         //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         BookmarksTableViewController *controller = (BookmarksTableViewController *)[segue destinationViewController];// topViewController];
         controller.detailItem = article;
+        controller.delegate = self;
         
     }
+}
+
+- (void)bookmark:(id)sender sendsURL:(NSURL *)url
+{
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+    [self.articleWebView loadRequest:request];
+    [self setDetailItem:sender];
 }
 
 @end
