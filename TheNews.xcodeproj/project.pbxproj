@@ -19,6 +19,7 @@
 		DC3C2EA31A9270F100A86BFB /* SharedNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2EA21A9270F100A86BFB /* SharedNetworking.m */; };
 		DC3C2EA61A927EDF00A86BFB /* NewsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2EA51A927EDF00A86BFB /* NewsListTableViewCell.m */; };
 		DC3C2EDE1A92A6BB00A86BFB /* BookmarksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C2EDD1A92A6BB00A86BFB /* BookmarksTableViewController.m */; };
+		DC3C2EE01A92BEFC00A86BFB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3C2EDF1A92BEFC00A86BFB /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		DC3C2EA51A927EDF00A86BFB /* NewsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTableViewCell.m; sourceTree = "<group>"; };
 		DC3C2EDC1A92A6BB00A86BFB /* BookmarksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksTableViewController.h; sourceTree = "<group>"; };
 		DC3C2EDD1A92A6BB00A86BFB /* BookmarksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksTableViewController.m; sourceTree = "<group>"; };
+		DC3C2EDF1A92BEFC00A86BFB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3C2EE01A92BEFC00A86BFB /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +80,7 @@
 		DC3C2E691A926CAC00A86BFB = {
 			isa = PBXGroup;
 			children = (
+				DC3C2EDF1A92BEFC00A86BFB /* Social.framework */,
 				DC3C2E741A926CAC00A86BFB /* TheNews */,
 				DC3C2E941A926CAC00A86BFB /* TheNewsTests */,
 				DC3C2E731A926CAC00A86BFB /* Products */,

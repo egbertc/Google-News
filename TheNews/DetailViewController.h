@@ -14,6 +14,7 @@
 @end
 
 @interface DetailViewController : UIViewController <BookmarkToWebViewDelegate>
+- (IBAction)tweetArticle:(id)sender;
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

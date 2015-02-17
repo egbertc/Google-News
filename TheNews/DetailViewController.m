@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "BookmarksTableViewController.h"
+#import <Social/Social.h>
 
 @interface DetailViewController ()
 
@@ -66,4 +67,15 @@
     [self setDetailItem:sender];
 }
 
+- (IBAction)tweetArticle:(id)sender
+{
+    //if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    //{
+        SLComposeViewController *tweetBox = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        NSMutableString *initTweet = [NSMutableString stringWithString:@"Check it: "];
+        [initTweet appendString:[_detailItem objectForKey:@"link"]];
+        [tweetBox setInitialText:initTweet];
+        [self presentViewController:tweetBox animated:YES completion:nil];
+    //}
+}
 @end

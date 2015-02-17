@@ -41,6 +41,19 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28T-vI-Vvh">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </webView>
+                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3i-DH-Pja">
+                                <rect key="frame" x="-8" y="556" width="616" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UGG-EZ-o3i"/>
+                                    <barButtonItem image="twitter-50" id="9FZ-ll-0Pg">
+                                        <connections>
+                                            <action selector="tweetArticle:" destination="JEX-9P-axG" id="06b-wn-wGl"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="oyT-16-2E6"/>
+                                </items>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -48,10 +61,14 @@
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="z0Q-fF-9T7" secondAttribute="bottom" constant="289" id="2XJ-Tw-TcM"/>
                             <constraint firstItem="28T-vI-Vvh" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="8ba-IE-BAO"/>
                             <constraint firstItem="z0Q-fF-9T7" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="AbI-vP-snq"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="d3i-DH-Pja" secondAttribute="bottom" id="K7B-yV-VFj"/>
                             <constraint firstAttribute="trailing" secondItem="28T-vI-Vvh" secondAttribute="trailing" id="QUT-vo-1zZ"/>
+                            <constraint firstAttribute="centerX" secondItem="d3i-DH-Pja" secondAttribute="centerX" id="U6d-sb-5Fl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d3i-DH-Pja" secondAttribute="trailing" constant="-24" id="aVW-bJ-jiG"/>
                             <constraint firstItem="28T-vI-Vvh" firstAttribute="bottom" secondItem="GAO-Cl-Wes" secondAttribute="top" id="eh1-gn-oSs"/>
                             <constraint firstAttribute="centerX" secondItem="z0Q-fF-9T7" secondAttribute="centerX" id="kJz-UN-WP0"/>
                             <constraint firstItem="z0Q-fF-9T7" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="utj-ow-bEN"/>
+                            <constraint firstItem="d3i-DH-Pja" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-24" id="yvF-Rf-VEv"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -232,6 +249,7 @@
     <resources>
         <image name="book-simple-7" width="29" height="30"/>
         <image name="bookmark-7" width="30" height="30"/>
+        <image name="twitter-50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GIo-R1-koI"/>
