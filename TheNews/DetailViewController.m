@@ -59,9 +59,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+//    UIViewController *vc = [[UIViewController alloc] init];
+//    vc.view.backgroundColor = [UIColor whiteColor];
+//    CGRect labelRect = CGRectMake(vc.view.center.x, vc.view.center.x, 100, 50);
+//    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:labelRect];
+//    loadingLabel.text = @"LOADING";
+//    [vc.view addSubview:loadingLabel];
+//    [self presentViewController:vc animated:NO completion:^{
+//        NSLog(@"Splash screen is showing");
+//    }];
+    
     self.articleWebView.delegate = self;
     self.loadingView.layer.cornerRadius = 5;
     self.loadingView.layer.masksToBounds = YES;
+    self.favIconImage.image = [self.favIconImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     _defaults = [NSUserDefaults standardUserDefaults];
     if(_detailItem == nil)
@@ -81,6 +92,11 @@
     //_bookmarks = retrievedBookmarks.bookmarks;
     //NSLog(@"BOOKMARKS\n-------------\n%@",_bookmarks);
     [self configureView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

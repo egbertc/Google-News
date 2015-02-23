@@ -34,6 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryOverlay;
+    
     _articleDateFormat = [[NSDateFormatter alloc] init];
     [_articleDateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZZ"]; //"Mon, 16 Feb 2015 10:33:43 -0800"
     _cellDateFormat = [[NSDateFormatter alloc] init];

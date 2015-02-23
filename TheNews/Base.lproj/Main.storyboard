@@ -54,12 +54,11 @@
                                 </items>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <view hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000016" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doT-Zz-mCB" userLabel="FavIconView">
+                            <view hidden="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doT-Zz-mCB" userLabel="FavIconView">
                                 <rect key="frame" x="556" y="512" width="38" height="37"/>
                                 <subviews>
                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle-tick" translatesAutoresizingMaskIntoConstraints="NO" id="VFz-2p-ane">
                                         <rect key="frame" x="0.0" y="0.0" width="38" height="37"/>
-                                        <color key="tintColor" red="0.85858585858585856" green="0.80401158399042938" blue="0.12953387894096935" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -114,6 +113,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="articleWebView" destination="28T-vI-Vvh" id="5wV-kq-ZLU"/>
+                        <outlet property="favIconImage" destination="VFz-2p-ane" id="Nz3-ts-tTF"/>
                         <outlet property="favIconView" destination="doT-Zz-mCB" id="iqY-MM-GTF"/>
                         <outlet property="loadingView" destination="vjJ-D8-6lc" id="kdd-r8-IzL"/>
                     </connections>
@@ -130,7 +130,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="bottom" barStyle="black" id="Gla-mB-dG7">
+                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="bottom" id="Gla-mB-dG7">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <items>

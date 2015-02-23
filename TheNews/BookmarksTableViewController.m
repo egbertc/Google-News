@@ -12,15 +12,16 @@
 @interface BookmarksTableViewController ()
 
 //@property (strong,nonatomic) NSMutableArray* bookmarks;
-//@property (strong,nonatomic) NSUserDefaults* defaults;
+@property (strong,nonatomic) NSUserDefaults* defaults;
 @end
 
 @implementation BookmarksTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //_defaults = [NSUserDefaults standardUserDefaults];
-    
+    _defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"VIEW HEIGHT %f", self.view.frame.size.height);
+    NSLog(@"TABLEVIEW HEIGHT %f",self.tableView.contentSize.height);//.frame.size.height);
     //_bookmarks = [[NSMutableArray alloc] initWithArray:[_defaults objectForKey:@"bookmarks"]];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -52,7 +53,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookmarkCell" forIndexPath:indexPath];
-    
+    if([[_defaults objectForKey:@"night_mode"] boolValue])
+    {
+        cell.backgroundColor = [UIColor colorWithRed:1.0/255.0 green:31.0/255.0 blue:75.0/255.0 alpha:1.0];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
     NSDictionary *article = [_bookmarks objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [article objectForKey:@"title"];
