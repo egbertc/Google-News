@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DA651A04-2D7E-461F-B31B-540AD0C63C5F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TheNews2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5E58F5DE88FCBACE423E1CB4C7A40DA83DFC3F27</key>
+		<string>https://github.com/uchicago-mobi/egbertc-MPCS51030-Winter-2015-Assignment-6.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TheNews2.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5E58F5DE88FCBACE423E1CB4C7A40DA83DFC3F27</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/uchicago-mobi/egbertc-MPCS51030-Winter-2015-Assignment-6.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5E58F5DE88FCBACE423E1CB4C7A40DA83DFC3F27</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5E58F5DE88FCBACE423E1CB4C7A40DA83DFC3F27</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TheNews</string>
+		</dict>
+	</array>
+</dict>
+</plist>
