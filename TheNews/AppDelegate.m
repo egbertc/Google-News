@@ -28,6 +28,9 @@
     MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
     
+    
+    
+    
     [self setDefaults];
     
     return YES;
@@ -68,15 +71,36 @@
         
     [defaults registerDefaults:bookmarkDefault];
     
+    BOOL night;
+    
     if([defaults objectForKey:@"night_mode"] != nil)
     {
         NSLog(@"NIGHT SETTING: %@", [defaults objectForKey:@"night_mode"]);
+        night = [[defaults objectForKey:@"night_mode"] boolValue];
     }
     else
     {
         NSNumber *nightMode = [[NSNumber alloc]initWithBool:NO];
         NSDictionary *nightSetting = [NSDictionary dictionaryWithObject:nightMode forKey:@"night_mode"];
         [defaults registerDefaults:nightSetting];
+        night = NO;
+    }
+    
+    if(night)
+    {
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack]; // change the header icons (clock, battery, etc..) to white
+        
+        [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], [UIColor blackColor], [NSValue valueWithUIOffset:UIOffsetMake(0, 1)],NSForegroundColorAttributeName , [UIFont fontWithName:@"Helvetica" size:0.0], NSFontAttributeName, nil] ];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:1.0/255.0 green:31.0/255.0 blue:75.0/255.0 alpha:1.0] ];
+    }
+    else
+    {
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+        
+        [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:1.0/255.0 green:31.0/255.0 blue:75.0/255.0 alpha:1.0],NSForegroundColorAttributeName, [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], [UIColor blackColor], [NSValue valueWithUIOffset:UIOffsetMake(0, 1)],NSForegroundColorAttributeName , [UIFont fontWithName:@"Helvetica" size:0.0], NSFontAttributeName, nil] ];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0] ];
     }
     
 }

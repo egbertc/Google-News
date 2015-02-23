@@ -37,6 +37,8 @@
         [self.articleWebView loadRequest:request];
         [_defaults removeObjectForKey:@"lastViewed"];
         [_defaults setObject:_detailItem forKey:@"lastViewed"];
+        self.navigationItem.title = [_detailItem objectForKey:@"title"];
+        NSLog(@"Load: %@", _detailItem);
     }
 }
 
