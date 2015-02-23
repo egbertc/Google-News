@@ -10,15 +10,18 @@
 
 @protocol BookmarkToWebViewDelegate <NSObject>
 @required
-- (void)bookmark:(id)sender sendsURL:(NSURL*)url;
+- (void)bookmark:(id)sender sendsURL:(NSURL*)url withBookmarkList:(NSMutableArray*)bm;
+- (void)bookmarkAdded:(id)sender;
 @end
 
-@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate>
+@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate,UIWebViewDelegate>
 - (IBAction)tweetArticle:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *favIconView;
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebView;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 
 

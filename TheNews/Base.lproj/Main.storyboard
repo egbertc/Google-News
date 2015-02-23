@@ -54,6 +54,33 @@
                                 </items>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
+                            <view hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000016" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doT-Zz-mCB" userLabel="FavIconView">
+                                <rect key="frame" x="556" y="512" width="38" height="37"/>
+                                <subviews>
+                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle-tick" translatesAutoresizingMaskIntoConstraints="NO" id="VFz-2p-ane">
+                                        <rect key="frame" x="0.0" y="0.0" width="38" height="37"/>
+                                        <color key="tintColor" red="0.85858585858585856" green="0.80401158399042938" blue="0.12953387894096935" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="G7Y-UM-C71"/>
+                                    <constraint firstAttribute="height" constant="37" id="aZE-gU-Jih"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjJ-D8-6lc">
+                                <rect key="frame" x="277" y="278" width="46" height="46"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="UhU-tm-s9W">
+                                        <rect key="frame" x="13" y="13" width="20" height="20"/>
+                                        <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.088937793909787871" blue="0.22222222222222221" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="OEi-Cs-1Vr"/>
+                                    <constraint firstAttribute="height" constant="46" id="Rfq-lL-nUh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,8 +92,12 @@
                             <constraint firstAttribute="trailing" secondItem="28T-vI-Vvh" secondAttribute="trailing" id="QUT-vo-1zZ"/>
                             <constraint firstAttribute="centerX" secondItem="d3i-DH-Pja" secondAttribute="centerX" id="U6d-sb-5Fl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="d3i-DH-Pja" secondAttribute="trailing" constant="-24" id="aVW-bJ-jiG"/>
+                            <constraint firstItem="d3i-DH-Pja" firstAttribute="top" secondItem="doT-Zz-mCB" secondAttribute="bottom" constant="7" id="cei-I7-yUO"/>
+                            <constraint firstItem="d3i-DH-Pja" firstAttribute="top" secondItem="vjJ-D8-6lc" secondAttribute="bottom" constant="232" id="e89-qV-8hb"/>
                             <constraint firstItem="28T-vI-Vvh" firstAttribute="bottom" secondItem="GAO-Cl-Wes" secondAttribute="top" id="eh1-gn-oSs"/>
                             <constraint firstAttribute="centerX" secondItem="z0Q-fF-9T7" secondAttribute="centerX" id="kJz-UN-WP0"/>
+                            <constraint firstAttribute="centerX" secondItem="vjJ-D8-6lc" secondAttribute="centerX" id="mIc-Ae-9li"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="doT-Zz-mCB" secondAttribute="trailing" constant="-10" id="oTY-IZ-To4"/>
                             <constraint firstItem="z0Q-fF-9T7" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="utj-ow-bEN"/>
                             <constraint firstItem="d3i-DH-Pja" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-24" id="yvF-Rf-VEv"/>
                         </constraints>
@@ -83,6 +114,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="articleWebView" destination="28T-vI-Vvh" id="5wV-kq-ZLU"/>
+                        <outlet property="favIconView" destination="doT-Zz-mCB" id="iqY-MM-GTF"/>
+                        <outlet property="loadingView" destination="vjJ-D8-6lc" id="kdd-r8-IzL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -250,6 +283,7 @@
     <resources>
         <image name="book-simple-7" width="29" height="30"/>
         <image name="bookmark-7" width="30" height="30"/>
+        <image name="circle-tick" width="30" height="30"/>
         <image name="twitter-50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -15,6 +15,7 @@
 
 @property (weak,nonatomic) id<BookmarkToWebViewDelegate> delegate;
 @property (strong,nonatomic) NSDictionary* detailItem;
+@property (strong,nonatomic) NSMutableArray* bookmarks;
 
 //- (void) setDetailItem:(NSDictionary*)item;
 

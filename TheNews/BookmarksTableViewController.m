@@ -7,20 +7,21 @@
 //
 
 #import "BookmarksTableViewController.h"
+#import "BookmarkStorage.h"
 
 @interface BookmarksTableViewController ()
 
-@property (strong,nonatomic) NSMutableArray* bookmarks;
-@property (strong,nonatomic) NSUserDefaults* defaults;
+//@property (strong,nonatomic) NSMutableArray* bookmarks;
+//@property (strong,nonatomic) NSUserDefaults* defaults;
 @end
 
 @implementation BookmarksTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _defaults = [NSUserDefaults standardUserDefaults];
+    //_defaults = [NSUserDefaults standardUserDefaults];
     
-    _bookmarks = [[NSMutableArray alloc] initWithArray:[_defaults objectForKey:@"bookmarks"]];
+    //_bookmarks = [[NSMutableArray alloc] initWithArray:[_defaults objectForKey:@"bookmarks"]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -59,14 +60,27 @@
     return cell;
 }
 
+- (void) writeBookmarks
+{
+    BookmarkStorage* bm = [[BookmarkStorage alloc] init];
+    bm.bookmarks = _bookmarks;
+    NSData* writeData = [NSKeyedArchiver archivedDataWithRootObject:bm];
+    NSError* err = nil;
+    NSURL *docs = [[NSFileManager new] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&err];
+    NSURL* file = [docs URLByAppendingPathComponent:@"bookmarks.plist"];
+    [writeData writeToURL:file atomically:NO];
+}
+
 - (IBAction)addBookmark:(id)sender;
 {
     NSLog(@"ADDING ITEM: %@", [_detailItem objectForKey:@"title"]);
     [_bookmarks addObject:_detailItem];
-    [_defaults removeObjectForKey:@"bookmarks"];
-    [_defaults setObject:_bookmarks forKey:@"bookmarks"];
-    
+    //[_defaults removeObjectForKey:@"bookmarks"];
+    //[_defaults setObject:_bookmarks forKey:@"bookmarks"];
+    NSLog(@"Total Bookmarks: %lu",(unsigned long)[_bookmarks count]);
     [self.tableView reloadData];
+    [_delegate bookmarkAdded:_detailItem];
+    [self writeBookmarks];
 }
 
 - (IBAction)editBookmarks:(id)sender;
@@ -78,11 +92,11 @@
 {
     NSLog(@"DELETE");
     [_bookmarks removeObjectAtIndex:indexPath.row];
-    [_defaults removeObjectForKey:@"bookmarks"];
-    [_defaults setObject:_bookmarks forKey:@"bookmarks"];
+    //[_defaults removeObjectForKey:@"bookmarks"];
+    //[_defaults setObject:_bookmarks forKey:@"bookmarks"];
     
     [self.tableView reloadData];
-
+    [self writeBookmarks];
 }
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,8 +107,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSURL *url = [NSURL URLWithString:[[_bookmarks objectAtIndex:indexPath.row ] objectForKey:@"link" ]];
-    [_delegate bookmark:[_bookmarks objectAtIndex:indexPath.row ] sendsURL:url];
+    [_delegate bookmark:[_bookmarks objectAtIndex:indexPath.row ] sendsURL:url withBookmarkList:_bookmarks];
 }
+
 
 
 /*
