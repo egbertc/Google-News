@@ -28,7 +28,7 @@
     MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
     
-    [self setBookmarkDefaults];
+    [self setDefaults];
     
     return YES;
 }
@@ -59,7 +59,7 @@
 
 #pragma mark - setDefaults
 
--(void)setBookmarkDefaults
+-(void)setDefaults
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -67,6 +67,18 @@
     NSDictionary *bookmarkDefault = [NSDictionary dictionaryWithObject:bookmarks forKey:@"bookmarks"];
         
     [defaults registerDefaults:bookmarkDefault];
+    
+    if([defaults objectForKey:@"night_mode"] != nil)
+    {
+        NSLog(@"NIGHT SETTING: %@", [defaults objectForKey:@"night_mode"]);
+    }
+    else
+    {
+        NSNumber *nightMode = [[NSNumber alloc]initWithBool:NO];
+        NSDictionary *nightSetting = [NSDictionary dictionaryWithObject:nightMode forKey:@"night_mode"];
+        [defaults registerDefaults:nightSetting];
+    }
+    
 }
 
 #pragma mark - Split view

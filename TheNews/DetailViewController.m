@@ -11,6 +11,7 @@
 #import <Social/Social.h>
 
 @interface DetailViewController ()
+@property (strong,nonatomic) NSUserDefaults* defaults;
 
 @end
 
@@ -34,12 +35,22 @@
     {
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString:[_detailItem objectForKey:@"link" ]] cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
         [self.articleWebView loadRequest:request];
+        [_defaults removeObjectForKey:@"lastViewed"];
+        [_defaults setObject:_detailItem forKey:@"lastViewed"];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    _defaults = [NSUserDefaults standardUserDefaults];
+    if(_detailItem == nil)
+    {
+        if ([_defaults objectForKey:@"lastViewed"] != nil)
+        {
+            _detailItem = [_defaults objectForKey:@"lastViewed"];
+        }
+    }
     [self configureView];
 }
 

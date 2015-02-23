@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSDateFormatter* cellDateFormat;
 @property (strong,nonatomic) SharedNetworking *networking;
 @property (strong,nonatomic) NSString* newsURL;
+@property (strong,nonatomic) NSUserDefaults* defaults;
+@property BOOL nightMode;
 
 @end
 
@@ -49,6 +51,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     _networking = [SharedNetworking sharedSharedNetworking];
+    _defaults = [NSUserDefaults standardUserDefaults];
+    _nightMode = [[_defaults objectForKey:@"night_mode"] boolValue];
     
     [_networking getDataForURL:_newsURL success:^(NSDictionary *data, NSError *error) {
         self.newsList = [[[data objectForKey:@"responseData"] objectForKey:@"feed"] objectForKey:@"entries"];
@@ -56,7 +60,7 @@
         NSLog(@"\n DATA LOADED \n");
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            [self loadFirstArticle];
+            //[self loadFirstArticle];
         });
         
     } failure:^{
@@ -196,6 +200,21 @@
     //NSLog(@"Snipped Set: %@",cell.articleSnippet.text);
     NSDate *pubDate = [_articleDateFormat dateFromString:[article objectForKey:@"publishedDate"]];
     cell.publishedDate.text = [_cellDateFormat stringFromDate:pubDate];
+    
+    if(_nightMode)
+    {
+        //NSLog(@"NIGHT MODE CELL");
+        cell.backgroundColor = [UIColor colorWithRed:1.0/255.0 green:31.0/255.0 blue:75.0/255.0 alpha:1.0];
+        cell.articleTitle.textColor = [UIColor whiteColor];
+        cell.articleTitle.backgroundColor = cell.backgroundColor;
+        cell.articleSnippet.textColor = [UIColor whiteColor];
+        cell.publishedDate.textColor = [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1.0];
+        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+        backView.backgroundColor = [UIColor blackColor];
+        cell.selectedBackgroundView = backView;
+    }
+    
     //NSLog(@"Date Set: %@",cell.publishedDate.text);
 }
 
